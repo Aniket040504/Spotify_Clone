@@ -43,24 +43,26 @@ masterPlay.addEventListener('click',()=>{
 })
 
 document.addEventListener('keydown', (e) => {
-
     if (e.code === 'Space') {
         e.preventDefault();
-
         if (audioElement.paused) {
             audioElement.play();
             masterPlay.classList.remove('fa-play-circle');
             masterPlay.classList.add('fa-pause-circle');
-            gif.style.opacity=1;
+            gif.style.opacity = 1;
         } else {
             audioElement.pause();
             masterPlay.classList.remove('fa-pause-circle');
             masterPlay.classList.add('fa-play-circle');
-            gif.style.opacity=0;    
+            gif.style.opacity = 0;
         }
+    } else if (e.code === 'ArrowRight') {
+        audioElement.currentTime = Math.min(audioElement.currentTime + 5, audioElement.duration);
+    } else if (e.code === 'ArrowLeft') {
+
+        audioElement.currentTime = Math.max(audioElement.currentTime - 5, 0);
     }
 });
-
 
 //seekBar
 
@@ -84,3 +86,47 @@ progressBar.addEventListener('change', () => {
     audioElement.currentTime = seekTime;
     isSeeking = false;
 });
+
+const makeAllPlays = () => {
+    Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) => {
+        element.classList.add('fa-play-circle');
+        element.classList.remove('fa-pause-circle');
+    });
+};
+
+Array.from(document.getElementsByClassName('songItemPlay')).forEach((element, i) => {
+    element.addEventListener('click', (e) => {
+        if (songIndex === i) {
+            // User clicked the same song
+            if (audioElement.paused) {
+                audioElement.play();
+                e.target.classList.remove('fa-play-circle');
+                e.target.classList.add('fa-pause-circle');
+                masterPlay.classList.remove('fa-play-circle');
+                masterPlay.classList.add('fa-pause-circle');
+                gif.style.opacity = 1;
+            } else {
+                audioElement.pause();
+                e.target.classList.remove('fa-pause-circle');
+                e.target.classList.add('fa-play-circle');
+                masterPlay.classList.remove('fa-pause-circle');
+                masterPlay.classList.add('fa-play-circle');
+                gif.style.opacity = 0;
+            }
+        } else {
+            makeAllPlays(); // Reset all to play icon
+            songIndex = i;
+            audioElement.src = songs[songIndex].filePath;
+            audioElement.currentTime = 0;
+            audioElement.play();
+
+            e.target.classList.remove('fa-play-circle');
+            e.target.classList.add('fa-pause-circle');
+            masterPlay.classList.remove('fa-play-circle');
+            masterPlay.classList.add('fa-pause-circle');
+            gif.style.opacity = 1;
+        }
+    });
+});
+
+
