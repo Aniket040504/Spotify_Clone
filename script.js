@@ -4,18 +4,24 @@ let masterPlay=document.getElementById('masterPlay');
 let progressBar=document.getElementById('myProgressBar');
 let gif=document.getElementById('gif');
 let isSeeking = false;
+let songItems = Array.from(document.getElementsByClassName('songItem'));
 
+let songs = [
+    { songName: "Lover - Taylor Swift", filePath: 'Asset/Song/1.mp3', coverPath: "Asset/Cover/1.jpg" },
+    { songName: "Salvatore - Lana Del Rey", filePath: 'Asset/Song/2.mp3', coverPath: "Asset/Cover/2.jpg" },
+    { songName: "Flashing Lights - Drake", filePath: 'Asset/Song/3.mp3', coverPath: "Asset/Cover/3.jpg" },
+    { songName: "Please Please Please - Sabrina Carpenter", filePath: 'Asset/Song/4.mp3', coverPath: "Asset/Cover/4.jpg" },
+    { songName: "Fein - Travis Scott", filePath: 'Asset/Song/5.mp3', coverPath: "Asset/Cover/5.jpg" },
+    { songName: "Chemtrails Over The County Club - Lana Del Rey", filePath: 'Asset/Song/6.mp3', coverPath: "Asset/Cover/6.jpg" },
+    { songName: "Young and Beautiful - Lana Del Rey", filePath: 'Asset/Song/7.mp3', coverPath: "Asset/Cover/7.jpg" },
 
+];
 
-let songs=[
-    {songName:"songname", filePath: 'Asset/Song/1.mp3', coverPath: "Asset/Cover/1.jpg"},
-    {songName:"songname", filePath: 'Asset/Song/2.mp3', coverPath: "Asset/Cover/2.jpg"},
-    {songName:"songname", filePath: 'Asset/Song/3.mp3', coverPath: "Asset/Cover/3.jpg"},
-    {songName:"songname", filePath: 'Asset/Song/4.mp3', coverPath: "Asset/Cover/4.jpg"},
-    {songName:"songname", filePath: 'Asset/Song/5.mp3', coverPath: "Asset/Cover/5.jpg"},
-    {songName:"songname", filePath: 'Asset/Song/6.mp3', coverPath: "Asset/Cover/6.jpg"},
-]
-
+songItems.forEach((element, i) => {
+    console.log(element,i);
+    element.getElementsByTagName('img')[0].src = songs[i].coverPath;
+    element.getElementsByClassName('songNames')[0].innerText = songs[i].songName;
+});
 
 //audioElement.play();
 

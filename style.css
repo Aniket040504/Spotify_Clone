@@ -86,31 +86,54 @@ nav ul li{
   width: 100%;;
 }
 
-.songItem{
-height: 50px;
-display: flex;
-background-color: rgb(233, 185, 185);
-color: rgb(66, 15, 15);
-margin: 12px 0;
-justify-content: space-around;
-align-items: center;
-border-radius: 60px;
+.songItem {
+  height: 40px;
+  display: flex;
+  background-color: rgb(233, 185, 185);
+  color: rgb(66, 15, 15);
+  margin: 12px 0;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  border-radius: 60px;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.songItem img{
-width: 70px;
-margin: 0 23px;
-border-radius: 5px 60px;
-}
-.timestamp{
-  margin: 0 15px ;
+.songItem img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
-.timestamp i{
+.songNames {
+  flex: 1; /* This makes the song name take up available space */
+  white-space: nowrap; /* Optional: prevents wrapping */
+  overflow: hidden; /* Optional: hides overflow */
+  text-overflow: ellipsis; /* Optional: adds ... if text is too long */
+}
+
+.songlistplay {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 100px; /* Set a fixed minimum width for the play area */
+  margin-right: 15px;
+}
+
+.timestamp {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 80px; /* Fixed width for timestamp + play button */
+}
+
+.timestamp i {
   cursor: pointer;
-  margin: 8px;
+  margin-left: 8px;
 }
-
 .songList h1{
  border: 10px solid pink;
  background-color: rgb(255, 255, 255);
