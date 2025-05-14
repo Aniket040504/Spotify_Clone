@@ -164,3 +164,34 @@ nav ul li{
   margin-right: 10px; /* Adjust as needed */
   vertical-align: middle;
 }
+
+#volumeSlider {
+  -webkit-appearance: none;
+  width: 150px;
+  height: 4px;
+  background: #ccc;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+#volumeSlider::-webkit-slider-runnable-track {
+  height: 4px;
+  background: #ddd;
+  border-radius: 2px;
+}
+
+#volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  background: #1db954;
+  border-radius: 50%;
+  margin-top: -5px; /* Centers thumb on track */
+  transition: background 0.3s ease;
+}
+
+#volumeSlider::-webkit-slider-thumb:hover {
+  background: #17a34a;
+  transform: scale(1.2);
+}

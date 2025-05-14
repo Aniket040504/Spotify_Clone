@@ -7,6 +7,7 @@ let isSeeking = false;
 let songItems = Array.from(document.getElementsByClassName('songItem'));
 const volumeSlider = document.getElementById('volumeSlider');
 let masterSongName=document.getElementById('masterSongName');
+const volumeLabel = document.getElementById('volumeLabel');
 
 let songs = [
     { songName: "Lover - Taylor Swift", filePath: 'Asset/Song/1.mp3', coverPath: "Asset/Cover/1.jpg" },
@@ -76,6 +77,33 @@ document.addEventListener('keydown', (e) => {
 
         audioElement.currentTime = Math.max(audioElement.currentTime - 5, 0);
     }
+});
+
+function updateVolumeSliderBackground() {
+    const value = (volumeSlider.value - volumeSlider.min) / (volumeSlider.max - volumeSlider.min) * 100;
+    volumeSlider.style.background = `linear-gradient(to right, #4caf50 ${value}%, #ddd ${value}%)`;
+}
+// Handle arrow key volume control
+document.addEventListener('keydown', function (e) {
+    const percentage = volumeSlider.value * 100;
+    if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        volumeSlider.value = Math.min(1, parseFloat(volumeSlider.value) + 0.05);
+        audioElement.volume = volumeSlider.value;
+    } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        volumeSlider.value = Math.max(0, parseFloat(volumeSlider.value) - 0.05);
+        audioElement.volume = volumeSlider.value;
+    }
+    updateVolumeSliderBackground();
+    volumeLabel.textContent = Math.round(volumeSlider.value * 100) + '%';
+});
+
+// Sync on slider change
+volumeSlider.addEventListener('input', () => {
+    audioElement.volume = volumeSlider.value;
+    updateVolumeSliderBackground();
+    volumeLabel.textContent = Math.round(volumeSlider.value * 100) + '%';
 });
 
 //seekBar
