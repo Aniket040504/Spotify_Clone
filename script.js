@@ -81,11 +81,9 @@ document.addEventListener('keydown', (e) => {
 
 function updateVolumeSliderBackground() {
     const value = (volumeSlider.value - volumeSlider.min) / (volumeSlider.max - volumeSlider.min) * 100;
-    volumeSlider.style.background = `linear-gradient(to right, #4caf50 ${value}%, #ddd ${value}%)`;
 }
-// Handle arrow key volume control
+
 document.addEventListener('keydown', function (e) {
-    const percentage = volumeSlider.value * 100;
     if (e.key === 'ArrowUp') {
         e.preventDefault();
         volumeSlider.value = Math.min(1, parseFloat(volumeSlider.value) + 0.05);
@@ -99,7 +97,6 @@ document.addEventListener('keydown', function (e) {
     volumeLabel.textContent = Math.round(volumeSlider.value * 100) + '%';
 });
 
-// Sync on slider change
 volumeSlider.addEventListener('input', () => {
     audioElement.volume = volumeSlider.value;
     updateVolumeSliderBackground();
