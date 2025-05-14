@@ -15,7 +15,10 @@
 <body>
     <nav>
         <ul>
-            <li class="brand"><img="spotify"><span>Spotify</span></li>
+            <li class="brand">
+                <img src="Asset/logo.png" alt="Brand Logo" width="50" height="50" />
+                <span>Chillify</span>
+              </li>
             <li>Home</li>
             <li>About</li>
         </ul>
@@ -23,7 +26,7 @@
 
     <div class="container">
         <div class="songList">
-            <h1> Best of NCS- Album Playlist</h1>
+            <h1> ChillScape – NCS Edition</h1>
             <div class="songItemContainer">
                 <div class="songItem">
                     <img alt="1">
@@ -74,7 +77,10 @@
             <i class="songItemPlayCommand fa-solid fa-3x fa-circle-play" id="masterPlay"></i>
             <i class="songItemPlayCommand  fa-solid fa-3x fa-forward" id="next"></i>
         </div>
-        <div class="songInfo"> <img src="Asset/5uwq.gif" id="gif" alt="songinfo" width="42px"> Lover - Taylor Swift</div>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1"><span id="volumeLabel">100%</span>
+      
+
+        <div class="songInfo"> <img src="Asset/5uwq.gif" id="gif" alt="songinfo" width="42px"><span id="masterSongName"></span> Lover - Taylor Swift</div>
     </div>
     <script src="https://kit.fontawesome.com/1529b79eeb.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>

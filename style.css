@@ -7,12 +7,15 @@ body {
 * {
   margin: 0;
   padding: 0;
+  font-family: "Varela Round", sans-serif;
+
 }
 
 nav{
     font-family: "Varela Round", sans-serif;
   font-weight: 400;
   font-style: normal;
+  position:relative;
 }
 
 nav ul{
@@ -58,7 +61,7 @@ nav ul li{
 
 .bottom{
   position: sticky;
-  height: 100px;
+  height: 100%;
   background-color: black;
   color: white;
   bottom: 0;
@@ -70,6 +73,7 @@ nav ul li{
 
 .icons{
   margin-top: 14px ;
+  margin-bottom: 10px;
 }
 
 .icons i{
@@ -79,6 +83,7 @@ nav ul li{
 #myProgressBar{
   width: 80vw;
   cursor: pointer;
+  margin-right: 20px;
 }
 
 .songItemContainer{
@@ -109,10 +114,10 @@ nav ul li{
 }
 
 .songNames {
-  flex: 1; /* This makes the song name take up available space */
-  white-space: nowrap; /* Optional: prevents wrapping */
-  overflow: hidden; /* Optional: hides overflow */
-  text-overflow: ellipsis; /* Optional: adds ... if text is too long */
+  flex: 1; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
 }
 
 .songlistplay {
@@ -127,7 +132,7 @@ nav ul li{
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 80px; /* Fixed width for timestamp + play button */
+  width: 80px; 
 }
 
 .timestamp i {
@@ -153,4 +158,9 @@ nav ul li{
 .songInfo img{
   opacity: 0;
   transition: opacity 0.6s ease-in;
+}
+
+#gif {
+  margin-right: 10px; /* Adjust as needed */
+  vertical-align: middle;
 }

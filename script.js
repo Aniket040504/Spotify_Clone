@@ -5,6 +5,8 @@ let progressBar=document.getElementById('myProgressBar');
 let gif=document.getElementById('gif');
 let isSeeking = false;
 let songItems = Array.from(document.getElementsByClassName('songItem'));
+const volumeSlider = document.getElementById('volumeSlider');
+let masterSongName=document.getElementById('masterSongName');
 
 let songs = [
     { songName: "Lover - Taylor Swift", filePath: 'Asset/Song/1.mp3', coverPath: "Asset/Cover/1.jpg" },
@@ -27,20 +29,27 @@ songItems.forEach((element, i) => {
 
 //play/pause
 
-masterPlay.addEventListener('click',()=>{
-    if(audioElement.paused || audioElement.currentTime<=0){
+masterPlay.addEventListener('click', () => {
+    if (audioElement.paused || audioElement.currentTime <= 0) {
         audioElement.play();
         masterPlay.classList.remove('fa-play-circle');
         masterPlay.classList.add('fa-pause-circle');
-        gif.style.opacity=1;
-    }
-    else{
+        gif.style.opacity = 1;
+
+        makeAllPlays(); // Reset all icons
+        document.getElementsByClassName('songItemPlay')[songIndex].classList.remove('fa-play-circle');
+        document.getElementsByClassName('songItemPlay')[songIndex].classList.add('fa-pause-circle');
+
+    } else {
         audioElement.pause();
         masterPlay.classList.remove('fa-pause-circle');
         masterPlay.classList.add('fa-play-circle');
-        gif.style.opacity=0;
+        gif.style.opacity = 0;
+
+        document.getElementsByClassName('songItemPlay')[songIndex].classList.remove('fa-pause-circle');
+        document.getElementsByClassName('songItemPlay')[songIndex].classList.add('fa-play-circle');
     }
-})
+});
 
 document.addEventListener('keydown', (e) => {
     if (e.code === 'Space') {
@@ -50,11 +59,16 @@ document.addEventListener('keydown', (e) => {
             masterPlay.classList.remove('fa-play-circle');
             masterPlay.classList.add('fa-pause-circle');
             gif.style.opacity = 1;
+            document.getElementsByClassName('songItemPlay')[songIndex].classList.remove('fa-play-circle');
+            document.getElementsByClassName('songItemPlay')[songIndex].classList.add('fa-pause-circle');
+    
         } else {
             audioElement.pause();
             masterPlay.classList.remove('fa-pause-circle');
             masterPlay.classList.add('fa-play-circle');
             gif.style.opacity = 0;
+            document.getElementsByClassName('songItemPlay')[songIndex].classList.remove('fa-pause-circle');
+            document.getElementsByClassName('songItemPlay')[songIndex].classList.add('fa-play-circle');
         }
     } else if (e.code === 'ArrowRight') {
         audioElement.currentTime = Math.min(audioElement.currentTime + 5, audioElement.duration);
@@ -111,6 +125,7 @@ Array.from(document.getElementsByClassName('songItemPlay')).forEach((element, i)
                 e.target.classList.add('fa-play-circle');
                 masterPlay.classList.remove('fa-pause-circle');
                 masterPlay.classList.add('fa-play-circle');
+                masterSongName.innerText=songs[songIndex].songName;
                 gif.style.opacity = 0;
             }
         } else {
@@ -124,9 +139,62 @@ Array.from(document.getElementsByClassName('songItemPlay')).forEach((element, i)
             e.target.classList.add('fa-pause-circle');
             masterPlay.classList.remove('fa-play-circle');
             masterPlay.classList.add('fa-pause-circle');
+            masterSongName.innerText=songs[songIndex].songName;
             gif.style.opacity = 1;
         }
     });
 });
 
 
+volumeSlider.addEventListener('input', () => {
+    audioElement.volume = volumeSlider.value;
+});
+volumeSlider.addEventListener('input', () => {
+    audioElement.volume = volumeSlider.value;
+    document.getElementById('volumeLabel').textContent = Math.round(volumeSlider.value * 100) + '%';
+});
+
+
+document.getElementById('next').addEventListener('click', () => {
+    if (songIndex >= songs.length - 1) {
+        songIndex = 0;
+    } else {
+        songIndex += 1;
+    }
+
+    makeAllPlays(); 
+
+    audioElement.src = songs[songIndex].filePath;
+    audioElement.currentTime = 0;
+    audioElement.play();
+    
+    masterPlay.classList.remove('fa-play-circle');
+    masterPlay.classList.add('fa-pause-circle');
+    masterSongName.innerText = songs[songIndex].songName;
+    gif.style.opacity = 1;
+
+    document.getElementsByClassName('songItemPlay')[songIndex].classList.remove('fa-play-circle');
+    document.getElementsByClassName('songItemPlay')[songIndex].classList.add('fa-pause-circle');
+});
+
+document.getElementById('prev').addEventListener('click', () => {
+    if (songIndex <= 0) {
+        songIndex = 0;
+    } else {
+        songIndex -= 1;
+    }
+
+    makeAllPlays(); 
+
+    audioElement.src = songs[songIndex].filePath;
+    audioElement.currentTime = 0;
+    audioElement.play();
+
+    masterPlay.classList.remove('fa-play-circle');
+    masterPlay.classList.add('fa-pause-circle');
+    masterSongName.innerText = songs[songIndex].songName;
+    gif.style.opacity = 1;
+
+    document.getElementsByClassName('songItemPlay')[songIndex].classList.remove('fa-play-circle');
+    document.getElementsByClassName('songItemPlay')[songIndex].classList.add('fa-pause-circle');
+});
